@@ -1,0 +1,9 @@
+notify:
+  pushplusToken: 'xxxxxx'
+
+user:
+  - name: '账号 1'
+    accessToken: 'xxxxx'
+    line: '昌平线'
+    station: '沙河站'
+    time: '0630-0640'
