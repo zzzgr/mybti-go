@@ -36,6 +36,7 @@ func checkToken() {
 		} else {
 			msg = fmt.Sprintf("%s 的token还有%f小时就要到期了，请赶快更新", u.Name, hour)
 		}
+		log.Println(msg)
 		notify.Pushplus(setting.GlobalConfig.Notify.PushplusToken,
 			"token有效期通知", msg)
 	}

@@ -8,11 +8,11 @@ import (
 func Setup() {
 	c := cron.New(cron.WithSeconds())
 	c.AddFunc("00 00 14 * * ?", func() { checkToken() })
-	c.AddFunc("00 00 12 * * ? ", func() { GetBalance() })
-	c.AddFunc("00 00 20 * * ? ", func() { GetBalance() })
+	c.AddFunc("00 00 12 * * ?", func() { GetBalance() })
+	c.AddFunc("00 00 20 * * ?", func() { GetBalance() })
 
 	// 启动
 	c.Start()
-	log.Println("自动抢票中")
+	log.Println("任务启动成功, 自动抢票中...")
 
 }

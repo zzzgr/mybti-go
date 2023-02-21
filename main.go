@@ -13,16 +13,29 @@ import (
 func main() {
 	// 加载配置文件
 	if err := setting.Init(); err != nil {
-		fmt.Printf("配置文件加载失败, 请在文件同级目录添加配置文件, err: %v\n", err)
+		log.Printf("配置文件加载失败, 请在文件同级目录添加配置文件, err: %v\n", err)
 		return
 	}
 
 	fmt.Println(`
-                 _     _   _                   
- _ __ ___  _   _| |__ | |_(_)       __ _  ___  
-| '_ ` + "`" + ` _ \| | | | '_ \| __| |_____ / _` + "`" + ` |/ _ \ 
-| | | | | | |_| | |_) | |_| |_____| (_| | (_) |
-|_| |_| |_|\__, |_.__/ \__|_|      \__, |\___/`)
+                    __    __  _                 
+   ____ ___  __  __/ /_  / /_(_)     ____ _____ 
+  / __ ` + "`" + `__ \/ / / / __ \/ __/ /_____/ __ ` + "`" + `/ __ \
+ / / / / / / /_/ / /_/ / /_/ /_____/ /_/ / /_/ /
+/_/ /_/ /_/\__, /_.___/\__/_/      \__, /\____/ 
+          /____/                  /____/        `)
+
+	// 打印账户
+	count := len(setting.GlobalConfig.User)
+	if count == 0 {
+		log.Println("未配置用户, 系统退出")
+		return
+	}
+
+	log.Println("当前配置如下: ")
+	for _, u := range setting.GlobalConfig.User {
+		log.Printf("%s: %s-%s (%s)\n", u.Name, u.Line, u.Station, u.Time)
+	}
 
 	// 设置定时任务
 	go func() {

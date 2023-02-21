@@ -1,8 +1,8 @@
 package setting
 
 type Config struct {
-	Notify Notify `json:"notify"`
-	User   []User `json:"user"`
+	Notify *Notify `json:"notify"`
+	User   []*User `json:"user"`
 }
 
 type Notify struct {

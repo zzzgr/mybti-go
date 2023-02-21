@@ -1,9 +1,9 @@
 package setting
 
 import (
-	"fmt"
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
+	"log"
 )
 
 var GlobalConfig = new(Config)
@@ -26,7 +26,7 @@ func Init() (err error) {
 	// 配置信息绑定到结构体变量
 	err = viper.Unmarshal(GlobalConfig)
 	if err != nil {
-		fmt.Printf("viper.Unmarshal() failed, err:%v\n", err)
+		log.Printf("viper.Unmarshal() failed, err:%v\n", err)
 	}
 
 	viper.WatchConfig()
@@ -34,17 +34,17 @@ func Init() (err error) {
 		err = viper.ReadInConfig()
 		if err != nil {
 			// 处理读取配置文件的错误
-			fmt.Printf("viper.ReadInConfig() failed, err:%v\n", err)
+			log.Printf("viper.ReadInConfig() failed, err:%v\n", err)
 			return
 		}
 
 		// 配置信息绑定到结构体变量
 		err = viper.Unmarshal(GlobalConfig)
 		if err != nil {
-			fmt.Printf("viper.Unmarshal() failed, err:%v\n", err)
+			log.Printf("viper.Unmarshal() failed, err:%v\n", err)
 		}
 
-		fmt.Println("检测到配置文件有变动,已实时加载")
+		log.Printf("检测到配置文件有变动,已实时加载")
 	})
 	return
 }
